@@ -19,8 +19,16 @@ declare module "discord-bot" {
             commands?: Array<DiscordBot.Command>,
             responses?: Array<DiscordBot.Response>
         );
+
         public loopPresences(list: Array<discord.PresenceData>, minutes: number, shuffle?: boolean): void;
         public newPresence(foo?: DiscordBot, p?: discord.PresenceData, time?: number): void;
+
+        private _emitError(err: Error): void;
+        private _findPrefix(message: discord.Message): void;
+        private _handleMessage(message: discord.Message): void;
+        private _handleCommands(message: discord.Message): boolean;
+        private _handleResponses(message: discord.Message): boolean;
+        private _handleGuildCreate(guild: discord.Guild): void;
     }
 
     namespace DiscordBot {
@@ -95,6 +103,8 @@ declare module "discord-bot" {
 
             public check(message: discord.Message, execute?: boolean): boolean;
             public say(message: discord.Message): void;
+
+            private _listCheck(message: discord.Message): boolean;
         }
 
         function getArgs(message: discord.Message, prefix: string): Array<string>;
