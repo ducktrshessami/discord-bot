@@ -19,8 +19,8 @@ declare module "discord-bot" {
             commands?: Array<DiscordBot.Command>,
             responses?: Array<DiscordBot.Response>
         );
-        loopPresences(list: Array<discord.PresenceData>, minutes: number, shuffle?: boolean): void;
-        newPresence(foo?: DiscordBot, p?: discord.PresenceData, time?: number): void;
+        public loopPresences(list: Array<discord.PresenceData>, minutes: number, shuffle?: boolean): void;
+        public newPresence(foo?: DiscordBot, p?: discord.PresenceData, time?: number): void;
     }
 
     namespace DiscordBot {
@@ -46,8 +46,8 @@ declare module "discord-bot" {
                 }
             );
 
-            check(message: discord.Message, prefix?: string, admin?: boolean, execute?: boolean): boolean;
-            exec(message: discord.Message, args?: Array<string>): void;
+            public check(message: discord.Message, prefix?: string, admin?: boolean, execute?: boolean): boolean;
+            public exec(message: discord.Message, args?: Array<string>): void;
         }
 
         class Response {
@@ -93,8 +93,8 @@ declare module "discord-bot" {
                 }
             );
 
-            check(message: discord.Message, execute?: boolean): boolean;
-            say(message: discord.Message): void;
+            public check(message: discord.Message, execute?: boolean): boolean;
+            public say(message: discord.Message): void;
         }
 
         function getArgs(message: discord.Message, prefix: string): Array<string>;
