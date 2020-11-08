@@ -26,7 +26,17 @@ declare module "discord-bot" {
 
     namespace DiscordBot {
         class Command {
+            public name: string;
+            public usage: string;
+            public description: string;
+            public subtitle: string;
+            public hidden: boolean;
+            public admin: boolean;
 
+            private callback: (message: discord.Message, args?: Array<string>) => void;
+
+            check(message: discord.Message, prefix?: string, admin?: boolean, execute?: boolean): boolean;
+            exec(message: discord.Message, args?: Array<string>): void;
         }
 
         class Response {
