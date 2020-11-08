@@ -9,7 +9,7 @@ declare module "discord-bot" {
         public commands: Array<DiscordBot.Command>;
         public responses: Array<DiscordBot.Response>
 
-        private presences: object;
+        protected presences: object;
 
         constructor(
             config: {
@@ -19,7 +19,6 @@ declare module "discord-bot" {
             commands?: Array<DiscordBot.Command>,
             responses?: Array<DiscordBot.Response>
         );
-
         loopPresences(list: Array<discord.PresenceData>, minutes: number, shuffle?: boolean): void;
         newPresence(foo?: DiscordBot, p?: discord.PresenceData, time?: number): void;
     }
@@ -35,12 +34,23 @@ declare module "discord-bot" {
 
             private callback: (message: discord.Message, args?: Array<string>) => void;
 
+            constructor(
+                cmd: string,
+                cb: (message: discord.Message, args?: Array<string>) => void,
+                options?: {
+                    usage?: string,
+                    description?: string,
+                    subtitle?: string,
+                    hidden?: boolean,
+                    admin?: boolean
+                }
+            );
             check(message: discord.Message, prefix?: string, admin?: boolean, execute?: boolean): boolean;
             exec(message: discord.Message, args?: Array<string>): void;
         }
 
         class Response {
-
+            constructor(tr: string, rs: string, )
         }
 
         function getArgs(message: discord.Message, prefix: string): Array<string>;
