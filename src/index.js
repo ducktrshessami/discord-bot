@@ -21,7 +21,7 @@ const defaultResponseOptions = { // Default response options
 };
 
 class DiscordBot extends discord.Client { // Main bot class
-    constructor(config, commands = [], responses = []) {
+    constructor(config = {}, commands = [], responses = []) {
         super(config.options);
         
         if (typeof config.prefix != "string") { // Prefix must be string
