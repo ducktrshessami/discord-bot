@@ -33,7 +33,7 @@ class Command { // Bot command class
     }
 };
 
-function getArgs(message, prefix) { // Get args for a command from a message
+function getArgs(message, prefix = "") { // Get args for a command from a message
     return message.content.toLowerCase().substring(prefix.length).replace(/\n/g, ' ').split(' ');
 }
 

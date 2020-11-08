@@ -33,7 +33,7 @@ declare module "discord-bot" {
 
     namespace DiscordBot {
         namespace Command {
-            function getArgs(message: discord.Message, prefix: string): Array<string>;
+            function getArgs(message: discord.Message, prefix?: string): Array<string>;
         }
 
         class Command {
