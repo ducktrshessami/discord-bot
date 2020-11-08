@@ -34,8 +34,8 @@ declare module "discord-bot" {
     }
 
     namespace DiscordBot {
-        const Command: BotCommand;
-        const Response: BotResponse;
+        const Command = BotCommand;
+        const Response = BotResponse;
     }
 
     export = DiscordBot;
