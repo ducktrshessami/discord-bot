@@ -32,6 +32,10 @@ declare module "discord-bot" {
     }
 
     namespace DiscordBot {
+        namespace Command {
+            function getArgs(message: discord.Message, prefix: string): Array<string>;
+        }
+
         class Command {
             public name: string;
             public usage: string;
@@ -106,8 +110,6 @@ declare module "discord-bot" {
 
             private _listCheck(message: discord.Message): boolean;
         }
-
-        function getArgs(message: discord.Message, prefix: string): Array<string>;
     }
 
     export = DiscordBot;
