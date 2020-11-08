@@ -45,14 +45,60 @@ declare module "discord-bot" {
                     admin?: boolean
                 }
             );
+
             check(message: discord.Message, prefix?: string, admin?: boolean, execute?: boolean): boolean;
             exec(message: discord.Message, args?: Array<string>): void;
         }
 
         class Response {
-            constructor(tr: string, rs: string, )
+            public trigger: string | Array<string>;
+            public response: any;
+
+            protected userWhitelist: Array<discord.Snowflake>;
+            protected userBlacklist: Array<discord.Snowflake>;
+            protected serverWhitelist: Array<discord.Snowflake>;
+            protected serverBlacklist: Array<discord.Snowflake>;
+            protected channelWhitelist: Array<discord.Snowflake>;
+            protected channelBlacklist: Array<discord.Snowflake>;
+
+            private checkFunction: ((message: discord.Message, trigger: string) => boolean) | ((message: discord.Message, trigger: Array<string>) => boolean);
+            private responseFunction: (message: discord.Message, response?: any) => void;
+
+            constructor(
+                tr: string,
+                rs?: any,
+                cf?: (message: discord.Message, trigger: string) => boolean,
+                rf?: (message: discord.Message, response?: any) => void,
+                options?: {
+                    userWhitelist?: Array<discord.Snowflake>,
+                    userBlacklist?: Array<discord.Snowflake>,
+                    serverWhitelist?: Array<discord.Snowflake>,
+                    serverBlacklist?: Array<discord.Snowflake>,
+                    channelWhitelist?: Array<discord.Snowflake>,
+                    channelBlacklist?: Array<discord.Snowflake>
+                }
+            );
+            constructor(
+                tr: Array<string>,
+                rs?: any,
+                cf?: (message: discord.Message, trigger: Array<string>) => boolean,
+                rf?: (message: discord.Message, response?: any) => void,
+                options?: {
+                    userWhitelist?: Array<discord.Snowflake>,
+                    userBlacklist?: Array<discord.Snowflake>,
+                    serverWhitelist?: Array<discord.Snowflake>,
+                    serverBlacklist?: Array<discord.Snowflake>,
+                    channelWhitelist?: Array<discord.Snowflake>,
+                    channelBlacklist?: Array<discord.Snowflake>
+                }
+            );
+
+            check(message: discord.Message, execute?: boolean): boolean;
+            say(message: discord.Message): void;
         }
 
         function getArgs(message: discord.Message, prefix: string): Array<string>;
     }
+
+    export = DiscordBot;
 }
