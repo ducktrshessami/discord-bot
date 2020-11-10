@@ -41,7 +41,7 @@ class DiscordBot extends discord.Client { // Main bot class
         this.newPresence();
     }
     
-    newPresence(foo = this, p, time) { // Update current presence
+    newPresence(p, time, foo = this) { // Update current presence
         if (foo.pTimeout) {
             clearTimeout(foo.pTimeout);
         }
@@ -59,7 +59,7 @@ class DiscordBot extends discord.Client { // Main bot class
             }
         }
         if (p && time) { // If setting a specified presence
-            foo.user.setPresence(p).then(() => foo.pTimeout = setTimeout(foo.newPresence, time, foo)).catch(foo._emitError);
+            foo.user.setPresence(p).then(() => foo.pTimeout = setTimeout(foo.newPresence, time, null, null, foo)).catch(foo._emitError);
         }
     }
     
