@@ -1,6 +1,6 @@
 {
   "name": "discord-bot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Another one",
   "main": "src/index.js",
   "author": "ducktrshessami",
