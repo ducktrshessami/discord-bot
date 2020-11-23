@@ -37,6 +37,7 @@ declare module "discord-bot" {
         }
 
         class Command {
+            public client: DiscordBot;
             public name: string;
             public usage: string;
             public description: string;
