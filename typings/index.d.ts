@@ -13,7 +13,8 @@ declare module "discord-bot" {
 
         constructor(
             config: {
-                token: string
+                token: string,
+                admin: Array<string>,
                 options?: discord.ClientOptions
             },
             commands?: Array<DiscordBot.Command>,
