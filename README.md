@@ -54,12 +54,32 @@ function rollCommand(message) {
 
 ![Example bot](./assets/images/foo.png)
 
-# API
+# Documentation
 
 ## Table of Contents
 
 ## Class: DiscordBot
 
+### DiscordBot(config[, commands, responses])
+
+### DiscordBot.loopPresences(list, minutes[, shuffle])
+
+### DiscordBot.newPresence([presence, time])
+
 ## Class: DiscordBot.Command
 
+### DiscordBot.Command(cmd, cb[, options])
+
+### Command.check(message[, prefix, admin, execute])
+
+### Command.exec(message[, args])
+
+### static Command.getArgs(message[, prefix])
+
 ## Class: DiscordBot.Response
+
+### DiscordBot.Response(trigger[, response, checkFunction, responseFunction, options])
+
+### Response.check(message[, execute])
+
+### Response.say(message)
