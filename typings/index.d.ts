@@ -50,7 +50,7 @@ declare module "discord-bot" {
 
             constructor(
                 cmd: string,
-                cb: (message: discord.Message, args?: Array<string>) => void,
+                callback: (message: discord.Message, args?: Array<string>) => void,
                 options?: {
                     usage?: string,
                     description?: string,
@@ -79,10 +79,10 @@ declare module "discord-bot" {
             private responseFunction: (message: discord.Message, response?: any) => void;
 
             constructor(
-                tr: string,
-                rs?: any,
-                cf?: (message: discord.Message, trigger: string) => boolean,
-                rf?: (message: discord.Message, response?: any) => void,
+                trigger: string,
+                response?: any,
+                checkFunction?: (message: discord.Message, trigger: string) => boolean,
+                responseFunction?: (message: discord.Message, response?: any) => void,
                 options?: {
                     userWhitelist?: Array<discord.Snowflake>,
                     userBlacklist?: Array<discord.Snowflake>,
@@ -93,10 +93,10 @@ declare module "discord-bot" {
                 }
             );
             constructor(
-                tr: Array<string>,
-                rs?: any,
-                cf?: (message: discord.Message, trigger: Array<string>) => boolean,
-                rf?: (message: discord.Message, response?: any) => void,
+                trigger: Array<string>,
+                response?: any,
+                checkFunction?: (message: discord.Message, trigger: Array<string>) => boolean,
+                responseFunction?: (message: discord.Message, response?: any) => void,
                 options?: {
                     userWhitelist?: Array<discord.Snowflake>,
                     userBlacklist?: Array<discord.Snowflake>,
