@@ -22,7 +22,7 @@ declare module "discord-bot" {
         );
 
         public loopPresences(list: Array<discord.PresenceData>, minutes: number, shuffle?: boolean): void;
-        public newPresence(p?: discord.PresenceData, time?: number): void;
+        public newPresence(presence?: discord.PresenceData, time?: number): void;
 
         private _emitError(err: Error): void;
         private _findPrefix(message: discord.Message): void;
