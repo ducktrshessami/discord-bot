@@ -1,7 +1,7 @@
 {
   "name": "discord-bot",
   "version": "1.1.0",
-  "description": "Another one",
+  "description": "A discord.js wrapper specific to bots",
   "main": "./lib/index.js",
   "author": "ducktrshessami",
   "dependencies": {

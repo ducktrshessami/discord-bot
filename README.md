@@ -1,6 +1,6 @@
 # discord-bot
 
-A [discord.js](https://discord.js.org/#/) wrapper to reduce effort
+A [discord.js](https://discord.js.org/#/) wrapper to reduce effort in making Discord bots
 
 Mainly for personal use
 
