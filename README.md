@@ -58,6 +58,22 @@ function rollCommand(message) {
 
 ## Table of Contents
 
+1. [Class: DiscordBot](#class-discordbot)
+    - [DiscordBot](#discordbotconfig-commands-responses)
+    - [DiscordBot.loopPresences](#discordbotlooppresenceslist-minutes-shuffle)
+    - [DiscordBot.newPresence](#discordbotnewpresencepresence-time)
+
+2. [Class: DiscordBot.Command](#class-discordbotcommand)
+    - [DiscordBot.Command](#discordbotcommandcmd-cb-options)
+    - [Command.check](#commandcheckmessage-prefix-admin-execute)
+    - [Command.exec](#commandexecmessage-args)
+    - [DiscordBot.Command.getArgs](#static-commandgetargsmessage-prefix)
+
+3. [Class: DiscordBot.Response](#class-discordbotresponse)
+    - [DiscordBot.Response](#discordbotresponsetrigger-response-checkfunction-responsefunction-options)
+    - [Response.check](#responsecheckmessage-execute)
+    - [Response.say](#responsesaymessage)
+
 ## Class: DiscordBot
 
 ### DiscordBot(config[, commands, responses])
