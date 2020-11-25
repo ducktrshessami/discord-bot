@@ -4,7 +4,10 @@ declare module "discord-bot" {
     class DiscordBot extends discord.Client {
         public config: {
             token: string,
-            options?: discord.ClientOptions
+            admin: Array<string>,
+            options?: discord.ClientOptions,
+            generateHelp?: boolean,
+            embedColor?: discord.ColorResolvable
         };
         public commands: Array<DiscordBot.Command>;
         public responses: Array<DiscordBot.Response>
@@ -15,7 +18,9 @@ declare module "discord-bot" {
             config: {
                 token: string,
                 admin: Array<string>,
-                options?: discord.ClientOptions
+                options?: discord.ClientOptions,
+                generateHelp?: boolean,
+                embedColor?: discord.ColorResolvable
             },
             commands?: Array<DiscordBot.Command>,
             responses?: Array<DiscordBot.Response>
@@ -49,7 +54,7 @@ declare module "discord-bot" {
             private callback: (message: discord.Message, args?: Array<string>) => void;
 
             constructor(
-                cmd: string,
+                name: string,
                 callback: (message: discord.Message, args?: Array<string>) => void,
                 options?: {
                     usage?: string,
