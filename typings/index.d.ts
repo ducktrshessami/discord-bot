@@ -6,7 +6,6 @@ declare module "discord-bot" {
             token: string,
             admin: Array<string>,
             options?: discord.ClientOptions,
-            generateHelp?: boolean,
             embedColor?: discord.ColorResolvable
         };
         public commands: Array<DiscordBot.Command>;
@@ -19,8 +18,11 @@ declare module "discord-bot" {
                 token: string,
                 admin: Array<string>,
                 options?: discord.ClientOptions,
-                generateHelp?: boolean,
-                embedColor?: discord.ColorResolvable
+                embedColor?: discord.ColorResolvable,
+                generateCmd?: {
+                    help?: boolean,
+                    prefix?: boolean
+                }
             },
             commands?: Array<DiscordBot.Command>,
             responses?: Array<DiscordBot.Response>
@@ -35,6 +37,8 @@ declare module "discord-bot" {
         private _handleCommands(message: discord.Message): boolean;
         private _handleResponses(message: discord.Message): boolean;
         private _handleGuildCreate(guild: discord.Guild): void;
+        private _generatePrefixCmd(): void;
+        private _generateHelpCmd(): void;
     }
 
     namespace DiscordBot {
