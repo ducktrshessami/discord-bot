@@ -4,7 +4,7 @@ declare module "discord-bot" {
     class DiscordBot extends discord.Client {
         public config: {
             token: String,
-            admin: Array<String>,
+            admin: Array<discord.Snowflake>,
             options?: discord.ClientOptions,
             embedColor?: discord.ColorResolvable
         };
@@ -16,26 +16,26 @@ declare module "discord-bot" {
         constructor(
             config: {
                 token: String,
-                admin: Array<String>,
+                admin: Array<discord.Snowflake>,
                 options?: discord.ClientOptions,
                 embedColor?: discord.ColorResolvable,
                 generateCmd?: {
-                    help?: boolean,
-                    prefix?: boolean
+                    help?: Boolean,
+                    prefix?: Boolean
                 }
             },
             commands?: Array<DiscordBot.Command>,
             responses?: Array<DiscordBot.Response>
         );
 
-        public loopPresences(list: Array<discord.PresenceData>, minutes: number, shuffle?: boolean): void;
+        public loopPresences(list: Array<discord.PresenceData>, minutes: number, shuffle?: Boolean): void;
         public newPresence(presence?: discord.PresenceData, time?: number): void;
 
         private _emitError(err: Error): void;
         private _findPrefix(message: discord.Message): void;
         private _handleMessage(message: discord.Message): void;
-        private _handleCommands(message: discord.Message): boolean;
-        private _handleResponses(message: discord.Message): boolean;
+        private _handleCommands(message: discord.Message): Boolean;
+        private _handleResponses(message: discord.Message): Boolean;
         private _handleGuildCreate(guild: discord.Guild): void;
         private _generatePrefixCmd(): void;
         private _generateHelpCmd(): void;
@@ -52,9 +52,9 @@ declare module "discord-bot" {
             public usage: String;
             public description: String;
             public subtitle: String;
-            public hidden: boolean;
-            public owner: boolean;
-            public admin: boolean;
+            public hidden: Boolean;
+            public owner: Boolean;
+            public admin: Boolean;
 
             private callback: (message: discord.Message, args?: Array<String>) => void;
 
@@ -65,13 +65,13 @@ declare module "discord-bot" {
                     usage?: String,
                     description?: String,
                     subtitle?: String,
-                    hidden?: boolean,
-                    owner?: boolean,
-                    admin?: boolean
+                    hidden?: Boolean,
+                    owner?: Boolean,
+                    admin?: Boolean
                 }
             );
 
-            public check(message: discord.Message, prefix?: String, admin?: boolean, execute?: boolean): boolean;
+            public check(message: discord.Message, prefix?: String, admin?: Boolean, execute?: Boolean): Boolean;
             public exec(message: discord.Message, args?: Array<String>): void;
         }
 
@@ -86,13 +86,13 @@ declare module "discord-bot" {
             protected channelWhitelist: Array<discord.Snowflake>;
             protected channelBlacklist: Array<discord.Snowflake>;
 
-            private checkFunction: ((message: discord.Message, trigger: String) => boolean) | ((message: discord.Message, trigger: Array<String>) => boolean);
+            private checkFunction: ((message: discord.Message, trigger: String) => Boolean) | ((message: discord.Message, trigger: Array<String>) => Boolean);
             private responseFunction: (message: discord.Message, response?: any) => void;
 
             constructor(
                 trigger: String,
                 response?: any,
-                checkFunction?: (message: discord.Message, trigger: String) => boolean,
+                checkFunction?: (message: discord.Message, trigger: String) => Boolean,
                 responseFunction?: (message: discord.Message, response?: any) => void,
                 options?: {
                     userWhitelist?: Array<discord.Snowflake>,
@@ -106,7 +106,7 @@ declare module "discord-bot" {
             constructor(
                 trigger: Array<String>,
                 response?: any,
-                checkFunction?: (message: discord.Message, trigger: Array<String>) => boolean,
+                checkFunction?: (message: discord.Message, trigger: Array<String>) => Boolean,
                 responseFunction?: (message: discord.Message, response?: any) => void,
                 options?: {
                     userWhitelist?: Array<discord.Snowflake>,
@@ -118,10 +118,10 @@ declare module "discord-bot" {
                 }
             );
 
-            public check(message: discord.Message, execute?: boolean): boolean;
+            public check(message: discord.Message, execute?: Boolean): Boolean;
             public say(message: discord.Message): void;
 
-            private _listCheck(message: discord.Message): boolean;
+            private _listCheck(message: discord.Message): Boolean;
         }
     }
 
