@@ -102,8 +102,8 @@ DiscordBot constructor
         - `prefix`: `Boolean` (Optional)
 
             ```json
-            usage: "@bot prefix <prefix>"
-            description: "Sets a custom prefix for commands"
+            usage: "@bot prefix [prefix]"
+            description: "Set or display the current server's custom command prefix"
             subtitle: "@bot will always work for commands even if a custom prefix is set"
             ```
 
