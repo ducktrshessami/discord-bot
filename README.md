@@ -56,6 +56,8 @@ function rollCommand(message) {
 
 # Documentation
 
+In this documentation, the [discord.js](https://discord.js.org/#/) module will simply be referred to as `discord`.
+
 ## Table of Contents
 
 1. [Class: DiscordBot](#class-discordbot)
@@ -76,11 +78,56 @@ function rollCommand(message) {
 
 ## Class: DiscordBot
 
+DiscordBot extends [discord.Client](https://discord.js.org/#/docs/main/stable/class/Client)
+
 ### DiscordBot(config[, commands, responses])
+
+DiscordBot constructor
+
+#### Params:
+- `config`: `Object`:
+    - `token`: `String` The bot's token obtained from the [Discord Developer Portal](https://discord.com/developers/applications)
+    - `admin`: `Array<discord.Snowflake>` [User IDs](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-) of users designated as botmins
+    - `options`: [`discord.ClientOptions`](https://discord.js.org/#/docs/main/stable/typedef/ClientOptions) (Optional)
+    - `embedColor`: [`discord.ColorResolvable`](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable) (Optional) The color for message embeds. Mostly for the pregenerated command list sent by the `help` command
+    - `generateCmd`: `Object`: (Optional) Set any of the following to `true` to use the preset command shown
+        - `help`: `Boolean` (Optional)
+
+            ```json
+            usage: "@bot help [cmd]"
+            description: "Displays a command list or describes a specific command"
+            subtitle: "<> denotes a required parameter, while [] denotes an optional one"
+            ```
+
+        - `prefix`: `Boolean` (Optional)
+
+            ```json
+            usage: "@bot prefix <prefix>"
+            description: "Sets a custom prefix for commands"
+            subtitle: "@bot will always work for commands even if a custom prefix is set"
+            ```
+
+- `commands`: `Array<DiscordBot.Command>` (Optional) The [Commands](#class-discordbotcommand) for this bot to handle
+- `responses`: `Array<DiscordBot.Response>` (Optional) The [Responses](#class-discordbotresponse) for this bot to handle
 
 ### DiscordBot.loopPresences(list, minutes[, shuffle])
 
+Set a list of presences to cycle through. The `Timeout` that handles this cycle is stored in `DiscordBot.pTimeout`.
+
+#### Params:
+- `list`: `Array<discord.PresenceData>` [Presences](https://discord.js.org/#/docs/main/stable/typedef/PresenceData) to loop
+- `minutes`: `Number` The interval to loop presences at (in minutes)
+- `shuffle`: `Boolean` (Optional) Set to `true` to randomize the order presences are set. Defaults to `true`
+
 ### DiscordBot.newPresence([presence, time])
+
+Sets a new presence for a duration. Called internally by `DiscordBot.loopPresences`.
+
+If no presence or duration is passed, uses a data stored from `DiscordBot.loopPresences`.
+
+#### Params:
+- `presence`: [`discord.PresenceData`](https://discord.js.org/#/docs/main/stable/typedef/PresenceData) (Optional)
+- `time`: `Number` (Optional) The duration for this presence to be displayed. If [`loopPresences`] has been called, goes back to looping the set presences.
 
 ## Class: DiscordBot.Command
 
