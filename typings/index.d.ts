@@ -9,7 +9,8 @@ declare module "discord-bot" {
             embedColor?: discord.ColorResolvable
         };
         public commands: Array<DiscordBot.Command>;
-        public responses: Array<DiscordBot.Response>
+        public responses: Array<DiscordBot.Response>;
+        public pTimeout: NodeJS.Timeout;
 
         protected presences: Object;
 
