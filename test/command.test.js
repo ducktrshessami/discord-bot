@@ -8,6 +8,13 @@ const ownerCmd = new Command("foo", works, { owner: true, aliases: ["f"] });
 const memberCmd = new Command("bar", works, { aliases: ["b"] });
 
 describe("Command", function() {
+    describe("#constructor", function() {
+        it("auto formats command name", function() {
+            const unformatted = " cHiCkEn\n", formatted = "chicken";
+            let cmd = new Command(unformatted, works);
+            assert.strictEqual(cmd.name, formatted);
+        });
+    });
     describe("#check", function() {
         it("handles aliases properly", function() {
             let message = {
