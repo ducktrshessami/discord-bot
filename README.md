@@ -163,6 +163,16 @@ Params:
 
 ### Command.check(message[, prefix, admin, execute])
 
+Internally called by `DiscordBot` instances when handling commands
+
+Params:
+- `message`: `discord.Message` The message to check
+- `prefix`: `String` (Optional) The command prefix used in the message
+- `admin`: `Boolean` (Optional) Whether the message's author is admin or not. Defaults to `false`
+- `execute`: `Boolean` (Optional) Set to `true` to call the callback on passing check. Defaults to `true`
+
+Returns: `Boolean` Whether the message passed the check or not
+
 ### Command.exec(message[, args])
 
 ### static Command.getArgs(message[, prefix])
