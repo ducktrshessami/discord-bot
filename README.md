@@ -163,6 +163,8 @@ Params:
 
 ### Command.check(message[, prefix, admin, execute])
 
+Checks if a message would trigger the command
+
 Internally called by `DiscordBot` instances when handling commands
 
 Params:
@@ -174,6 +176,14 @@ Params:
 Returns: `Boolean` Whether the message passed the check or not
 
 ### Command.exec(message[, args])
+
+Calls the command's callback on a Message
+
+Internally called by `DiscordBot` after calling `Command.check`
+
+Params:
+- `message`: `discord.Message` The message that triggered the command
+- `args`: `Array<String>` (Optional) The args parsed from the message
 
 ### static Command.getArgs(message[, prefix])
 
