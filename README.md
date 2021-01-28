@@ -131,7 +131,33 @@ If no presence or duration is passed, uses a data stored from `DiscordBot.loopPr
 
 ## Class: DiscordBot.Command
 
+Commands passed to a DiscordBot instance will automatically be triggered by messages with the `content` in the following format:
+
+```
+[prefix]<cmd> [args]
+```
+
+The default prefix for a bot is an @ mention. This cannot be disabled.
+
 ### DiscordBot.Command(cmd, cb[, options])
+
+Command constructor
+
+Params:
+- `cmd`: `String` The commmand's name
+- `cb`: `function(message, args)` The callback when the command is triggered
+
+    Params:
+    - `message`: `discord.Message` The message that triggered the command
+    - `args`: `Array<String>` The args parsed from the message (CLI format so args[0] is the cmd)
+- `options`: `Object`: (Optional)
+    - `usage`: `String` (Optional) For display in the help command
+    - `description`: `String` (Optional) For display in the help command
+    - `subtitle`: `String` (Optional) For display in the help command
+    - `hidden`: `Boolean` (Optional) Set to `true` to be unlisted in the help command
+    - `owner`: `Boolean` (Optional) Set to `true` to restrict the command to the server owner
+    - `admin`: `Boolean` (Optional) Set to `true` to restrict the command to bot admins
+    - `aliases`: `Array<String>` (Optional) Alternate command names that trigger the same callback
 
 ### Command.check(message[, prefix, admin, execute])
 
