@@ -131,18 +131,128 @@ If no presence or duration is passed, uses a data stored from `DiscordBot.loopPr
 
 ## Class: DiscordBot.Command
 
+Commands passed to a `DiscordBot` instance will automatically be triggered by messages with the `Message.content` in the following format:
+
+```
+[prefix]<cmd> [args]
+```
+
+The default prefix for a bot is an @ mention. This cannot be disabled.
+
+After being passed to a `DiscordBot` instance the `Command` will be given a `client` property that references the `DiscordBot` instance. This can be used as an alternative to referencing the `Message.client` property within the command callback.
+
 ### DiscordBot.Command(cmd, cb[, options])
+
+Command constructor
+
+Params:
+- `cmd`: `String` The commmand's name
+- `cb`: `function(message, args)` The callback when the command is triggered
+
+    Params:
+    - `message`: `discord.Message` The message that triggered the command
+    - `args`: `Array<String>` The args parsed from the message (CLI format so args[0] is the cmd)
+- `options`: `Object`: (Optional)
+    - `usage`: `String` (Optional) For display in the help command
+    - `description`: `String` (Optional) For display in the help command
+    - `subtitle`: `String` (Optional) For display in the help command
+    - `hidden`: `Boolean` (Optional) Set to `true` to be unlisted in the help command
+    - `owner`: `Boolean` (Optional) Set to `true` to restrict the command to the server owner
+    - `admin`: `Boolean` (Optional) Set to `true` to restrict the command to bot admins
+    - `aliases`: `Array<String>` (Optional) Alternate command names that trigger the same callback
 
 ### Command.check(message[, prefix, admin, execute])
 
+Checks if a message would trigger the command
+
+Internally called by `DiscordBot` instances when handling commands
+
+Params:
+- `message`: `discord.Message` The message to check
+- `prefix`: `String` (Optional) The command prefix used in the message
+- `admin`: `Boolean` (Optional) Whether the message's author is admin or not. Defaults to `false`
+- `execute`: `Boolean` (Optional) Set to `true` to call the callback on passing check. Defaults to `true`
+
+Returns: `Boolean` Whether the message passed the check or not
+
 ### Command.exec(message[, args])
+
+Calls the command's callback on a message
+
+Internally called by `DiscordBot` after calling `Command.check`
+
+Params:
+- `message`: `discord.Message` The message that triggered the command
+- `args`: `Array<String>` (Optional) The args parsed from the message
 
 ### static Command.getArgs(message[, prefix])
 
+Parse a message's content into an arg Array
+
+Internally called by `Command.check`
+
+Params:
+- `message`: `discord.Message` The message to parse
+- `prefix`: `String` (Optional) The command prefix to ignore in parsing
+
 ## Class: DiscordBot.Response
+
+Handles non-command responses
+
+By default, it either matches keywords or full `Message.content` depending on the trigger being an `Array<String>` or a `String` respectively.
+
+Because of its flexibility, this class can be used for a variety of things.
 
 ### DiscordBot.Response(trigger[, response, checkFunction, responseFunction, options])
 
+Response constructor
+
+Params: 
+- `trigger`: `Array<String> | String` The text that triggers this response
+- `response`: `any` (Optional) Something passed to the second parameter of the response callback
+- `checkFunction`: `function(message, trigger)` (Optional) The function that tests whether a message would trigger a response. Default values detailed below
+
+    Params:
+    - `message`: `discord.Message` The message to test
+    - `trigger`: `Array<String> | String` The trigger from this response
+- `responseFunction`: `function(message, response)` (Optional) The function that handles responding to the message. Default value detailed below
+
+    Params:
+    - `message`: `discord.Message` The message to respond to
+    - `response`: `any` (Optional) Usually the message to send back
+- `options`: `Object` (Optional) Restrict this response by various IDs
+    - `userWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with userBlacklist
+    - `userBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with userWhitelist
+    - `serverWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with serverBlacklist
+    - `serverBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with serverWhitelist
+    - `channelWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelBlacklist
+    - `channelBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelWhitelist
+
+#### Default checkFunction
+
+If the trigger is a `String`, the default checkFunction case-insensitively compares the `Message.content` to the trigger
+
+Otherwise the trigger is assumed to be an `Array` and case-insensitively checks if the `Message.content` includes each item in the Array
+
+#### Default responseFunction
+
+Sends the `response` parameter as the message content to the trigger Message's channel
+
 ### Response.check(message[, execute])
 
+Handles whitelists/blacklists and calls the checkFunction on a Message
+
+Internally called by `DiscordBot` instances when handling responses
+
+Params:
+- `message`: `discord.Message` The message to check
+- `execute`: `Boolean` (Optional) Set to `true` to call the responseFunction on passing check. Defaults to `true`
+
 ### Response.say(message)
+
+Calls the responseFunction on a Message
+
+Internally called by `DiscordBot` after calling `Response.check`
+
+Params:
+- `message`: `discord.Message` The message to respond to
