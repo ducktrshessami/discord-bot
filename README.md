@@ -249,3 +249,10 @@ Params:
 - `execute`: `Boolean` (Optional) Set to `true` to call the responseFunction on passing check. Defaults to `true`
 
 ### Response.say(message)
+
+Calls the responseFunction on a Message
+
+Internally called by `DiscordBot` after calling `Response.check`
+
+Params:
+- `message`: `discord.Message` The message to respond to
