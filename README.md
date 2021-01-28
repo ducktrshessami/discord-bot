@@ -131,13 +131,15 @@ If no presence or duration is passed, uses a data stored from `DiscordBot.loopPr
 
 ## Class: DiscordBot.Command
 
-Commands passed to a DiscordBot instance will automatically be triggered by messages with the `content` in the following format:
+Commands passed to a `DiscordBot` instance will automatically be triggered by messages with the `Message.content` in the following format:
 
 ```
 [prefix]<cmd> [args]
 ```
 
 The default prefix for a bot is an @ mention. This cannot be disabled.
+
+After being passed to a `DiscordBot` instance the `Command` will be given a `client` property that references the `DiscordBot` instance. This can be used as an alternative to referencing the `Message.client` property within the command callback.
 
 ### DiscordBot.Command(cmd, cb[, options])
 
