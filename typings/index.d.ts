@@ -56,6 +56,7 @@ declare module "discord-bot" {
             public hidden: Boolean;
             public owner: Boolean;
             public admin: Boolean;
+            public aliases: Array<String>;
 
             private callback: (message: discord.Message, args?: Array<String>) => void;
 
@@ -68,7 +69,8 @@ declare module "discord-bot" {
                     subtitle?: String,
                     hidden?: Boolean,
                     owner?: Boolean,
-                    admin?: Boolean
+                    admin?: Boolean,
+                    aliases?: Array<String>;
                 }
             );
 
