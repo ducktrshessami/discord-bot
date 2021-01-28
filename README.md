@@ -199,7 +199,7 @@ Params:
 
 Handles non-command responses
 
-By default, it either matches keywords or full `discord.Message.content` depending on the trigger being an `Array<String>` or a `String` respectively.
+By default, it either matches keywords or full `Message.content` depending on the trigger being an `Array<String>` or a `String` respectively.
 
 Because of its flexibility, this class can be used for a variety of things.
 
@@ -215,7 +215,7 @@ Params:
     Params:
     - `message`: `discord.Message` The message to test
     - `trigger`: `Array<String> | String` The trigger from this response
-- `responseFunction`: `function(message, response)` (Optional) The function that handles responding to the message
+- `responseFunction`: `function(message, response)` (Optional) The function that handles responding to the message. Default value detailed below
 
     Params:
     - `message`: `discord.Message` The message to respond to
@@ -227,6 +227,16 @@ Params:
     - `serverBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with serverWhitelist
     - `channelWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelBlacklist
     - `channelBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelWhitelist
+
+#### Default checkFunction
+
+If the trigger is a `String`, the default checkFunction case-insensitively compares the `Message.content` to the trigger
+
+Otherwise the trigger is assumed to be an `Array` and case-insensitively checks if the `Message.content` includes each item in the Array
+
+#### Default responseFunction
+
+Sends the `response` parameter as the message content to the trigger Message's channel
 
 ### Response.check(message[, execute])
 
