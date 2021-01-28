@@ -177,7 +177,7 @@ Returns: `Boolean` Whether the message passed the check or not
 
 ### Command.exec(message[, args])
 
-Calls the command's callback on a Message
+Calls the command's callback on a message
 
 Internally called by `DiscordBot` after calling `Command.check`
 
@@ -186,6 +186,14 @@ Params:
 - `args`: `Array<String>` (Optional) The args parsed from the message
 
 ### static Command.getArgs(message[, prefix])
+
+Parse a message's content into an arg Array
+
+Internally called by `Command.check`
+
+Params:
+- `message`: `discord.Message` The message to parse
+- `prefix`: `String` (Optional) The command prefix to ignore in parsing
 
 ## Class: DiscordBot.Response
 
