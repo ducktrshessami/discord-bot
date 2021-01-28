@@ -240,4 +240,12 @@ Sends the `response` parameter as the message content to the trigger Message's c
 
 ### Response.check(message[, execute])
 
+Handles whitelists/blacklists and calls the checkFunction on a Message
+
+Internally called by `DiscordBot` instances when handling responses
+
+Params:
+- `message`: `discord.Message` The message to check
+- `execute`: `Boolean` (Optional) Set to `true` to call the responseFunction on passing check. Defaults to `true`
+
 ### Response.say(message)
