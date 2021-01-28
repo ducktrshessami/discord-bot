@@ -197,7 +197,36 @@ Params:
 
 ## Class: DiscordBot.Response
 
+Handles non-command responses
+
+By default, it either matches keywords or full `discord.Message.content` depending on the trigger being an `Array<String>` or a `String` respectively.
+
+Because of its flexibility, this class can be used for a variety of things.
+
 ### DiscordBot.Response(trigger[, response, checkFunction, responseFunction, options])
+
+Response constructor
+
+Params: 
+- `trigger`: `Array<String> | String` The text that triggers this response
+- `response`: `any` (Optional) Something passed to the second parameter of the response callback
+- `checkFunction`: `function(message, trigger)` (Optional) The function that tests whether a message would trigger a response. Default values detailed below
+
+    Params:
+    - `message`: `discord.Message` The message to test
+    - `trigger`: `Array<String> | String` The trigger from this response
+- `responseFunction`: `function(message, response)` (Optional) The function that handles responding to the message
+
+    Params:
+    - `message`: `discord.Message` The message to respond to
+    - `response`: `any` (Optional) Usually the message to send back
+- `options`: `Object` (Optional) Restrict this response by various IDs
+    - `userWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with userBlacklist
+    - `userBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with userWhitelist
+    - `serverWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with serverBlacklist
+    - `serverBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with serverWhitelist
+    - `channelWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelBlacklist
+    - `channelBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelWhitelist
 
 ### Response.check(message[, execute])
 
