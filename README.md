@@ -256,3 +256,13 @@ Internally called by `DiscordBot` after calling `Response.check`
 
 Params:
 - `message`: `discord.Message` The message to respond to
+
+# Testing
+
+Testing handled by [mocha](https://mochajs.org/)
+
+```
+npm run test
+```
+
+Test scripts are currently unfinished
