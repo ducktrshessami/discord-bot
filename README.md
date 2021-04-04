@@ -69,7 +69,7 @@ In this documentation, the [discord.js](https://discord.js.org/#/) module will s
     - [DiscordBot.Command](#discordbotcommandcmd-cb-options)
     - [Command.check](#commandcheckmessage-prefix-admin-execute)
     - [Command.exec](#commandexecmessage-args)
-    - [DiscordBot.Command.getArgs](#static-commandgetargsmessage-prefix)
+    - [DiscordBot.Command.getArgs](#discordbotcommandgetargsmessage-prefix)
 
 3. [Class: DiscordBot.Response](#class-discordbotresponse)
     - [DiscordBot.Response](#discordbotresponsetrigger-response-checkfunction-responsefunction-options)
@@ -192,7 +192,7 @@ Params:
 - `message`: `discord.Message` The message that triggered the command
 - `args`: `Array<String>` (Optional) The args parsed from the message
 
-### static Command.getArgs(message[, prefix])
+### DiscordBot.Command.getArgs(message[, prefix])
 
 Parse a message's content into an arg Array
 
@@ -201,6 +201,8 @@ Internally called by `Command.check`
 Params:
 - `message`: `discord.Message` The message to parse
 - `prefix`: `String` (Optional) The command prefix to ignore in parsing
+
+Returns: `Array`<`String`> The list of args from the message content (CLI style, the first arg is the command)
 
 ## Class: DiscordBot.Response
 
@@ -254,6 +256,8 @@ Internally called by `DiscordBot` instances when handling responses
 Params:
 - `message`: `discord.Message` The message to check
 - `execute`: `Boolean` (Optional) Set to `true` to call the responseFunction on passing check. Defaults to `true`
+
+Returns: `Boolean` Whether the message passed the check or not
 
 ### Response.say(message)
 
