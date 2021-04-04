@@ -129,21 +129,21 @@ declare module "discord-bot" {
 
         namespace utils {
             function awaitResponse(
+                messageTest: (reply: discord.Message) => Boolean,
+                ms: Number,
                 channel: discord.TextChannel,
                 content?: discord.StringResolvable | discord.APIMessage,
                 options?: discord.MessageOptions | discord.MessageAdditions,
-                messageTest: (reply: discord.Message) => Boolean,
-                ms: Number,
                 verbose?: Boolean
             ): Promise<discord.Message | void>;
             function logMessage(message: discord.Message): discord.Message;
             function reactButtons(
                 message: discord.Message,
+                ms: Number,
                 reactHandlers?: Array<{
                     emoji: discord.EmojiIdentifierResolvable,
                     callback: (reaction: discord.MessageReaction, user: discord.User) => void;
                 }>,
-                ms: Number,
                 maxMs?: Number
             ): Promise<discord.Message>;
             function sendPages(
@@ -152,9 +152,9 @@ declare module "discord-bot" {
                     content?: discord.StringResolvable | discord.APIMessage,
                     options?: discord.MessageOptions | discord.MessageAdditions
                 }>,
+                ms: Number,
                 left?: discord.EmojiIdentifierResolvable,
                 right?: discord.EmojiIdentifierResolvable,
-                ms: Number,
                 maxMs?: Number
             ): Promise<discord.Message>;
             function sendVerbose(channel: discord.TextChannel, content?: discord.StringResolvable | discord.APIMessage, options?: discord.MessageOptions | discord.MessageAdditions): Promise<discord.Message>;
