@@ -288,7 +288,12 @@ Returns: `Promise`<`discord.Message`> Resolves in the message that passed the te
 
 ### DiscordBot.utils.logMessage(message)
 
-Log a message
+Log a message to the console
+
+Params:
+- `message`: `discord.Message` The message to log
+
+Returns: `discord.Message` The logged message
 
 ### DiscordBot.utils.reactButtons(message, ms, reactHandlers, maxMs)
 
