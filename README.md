@@ -270,6 +270,22 @@ Params:
 
 Send a message and wait for a reply that passes a given test
 
+Params:
+- `messageTest`: `function(reply)` The testing function
+    
+    Params:
+    - `reply`: `discord.Message` An incoming message in the same channel
+
+    Returns: `Boolean` Whether the message passed the check or not
+
+- `ms`: `Number` The amount of time to wait for a proper response
+- `channel`: `discord.TextChannel` The channel to send a message to watch for a reply
+- `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) Message content
+- `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) Message options
+- `verbose`: `Boolean` (Optional) Set to true to log the initial and resolving messages. Defaults to `true`
+
+Returns: `Promise`<`discord.Message`> Resolves in the message that passed the test function. If time ran out before a message passed, resolves in `undefined`
+
 ### DiscordBot.utils.logMessage(message)
 
 Log a message
