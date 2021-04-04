@@ -317,7 +317,21 @@ Returns: `Promise`<`discord.Message`> Resolves in the message the buttons were a
 
 ### DiscordBot.utils.sendPages(channel, pages, ms, left, right, maxMs)
 
-sendVerbose a message and set up handling for reacts to change the message content
+`sendVerbose` a message and set up handling for reacts to change the message content with `reactButtons`
+
+Params:
+- `channel`: `discord.TextChannel` The channel to send the message to
+- `pages`: `Array`<`Page`> The list of pages to cycle through
+
+    `Page` properties:
+    - `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) The message content for this page
+    - `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) The message options for this page
+- `ms`: `Number` The the amount of time to handle the buttons. The timer resets when a buttons is clicked
+- `left`: `discord.EmojiIdentifierResolvable` (Optional) The emoji for the left button
+- `right`: `discord.EmojiIdentifierResolvable` (Optional) The emoji for the right button
+- `ms`: `Number` (Optional) The maximum time to handle the buttons even with buttons being clicked. If undefined, will only stop when timing out from inactivity
+
+Returns: `Promise`<`discord.Message`> Resolves in the message sent
 
 ### DiscordBot.utils.sendVerbose(channel, content, options)
 
