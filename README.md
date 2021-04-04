@@ -79,7 +79,7 @@ In this documentation, the [discord.js](https://discord.js.org/#/) module will s
 4. [DiscordBot.utils](#discordbotutils)
     - [DiscordBot.utils.awaitResponse](#discordbotutilsawaitresponsemessagetest-ms-channel-content-options-verbose)
     - [DiscordBot.utils.logMessage](#discordbotutilslogmessagemessage)
-    - [DiscordBot.utils.reactButtons](#discordbotutilsreactbuttonsmessage-ms-reacthandlers-maxms)
+    - [DiscordBot.utils.reactButtons](#discordbotutilsreactbuttonsmessage-reacthandlers-ms-maxms)
     - [DiscordBot.utils.sendPages](#discordbotutilssendpageschannel-pages-ms-left-right-maxms)
     - [DiscordBot.utils.sendVerbose](#discordbotutilssendverbosechannel-content-options)
 
@@ -295,9 +295,25 @@ Params:
 
 Returns: `discord.Message` The logged message
 
-### DiscordBot.utils.reactButtons(message, ms, reactHandlers, maxMs)
+### DiscordBot.utils.reactButtons(message, reactHandlers, ms, maxMs)
 
-Handle message react buttons
+Handle message reacts as buttons with callbacks
+
+Params:
+- `message`: `discord.Message` The message to apply react buttons to
+- `reactHandlers`: `Array`<`ReactHandler`> An array of ReactHandlers
+
+    `ReactHandler` properties:
+    - `emoji`: `discord.EmojiIdentifierResolvable` The emoji to react with
+    - `callback`: `function(reaction, user)` The callback for the button being clicked
+
+        Params:
+        - `reaction`: `discord.MessageReaction` The reaction object from Discord
+        - `user`: `discord.User` The user that reacted
+- `ms`: `Number` The the amount of time to handle the buttons. The timer resets when a buttons is clicked
+- `maxMs`: `Number` (Optional) The maximum time to handle the buttons even with buttons being clicked. If undefined, will only stop when timing out from inactivity
+
+Returns: `Promise`<`discord.Message`> Resolves in the message the buttons were applied to
 
 ### DiscordBot.utils.sendPages(channel, pages, ms, left, right, maxMs)
 
