@@ -77,11 +77,11 @@ In this documentation, the [discord.js](https://discord.js.org/#/) module will s
     - [Response.say](#responsesaymessage)
 
 4. [DiscordBot.utils](#discordbotutils)
-    - [DiscordBot.utils.awaitResponse]
-    - [DiscordBot.utils.logMessage]
-    - [DiscordBot.utils.reactButtons]
-    - [DiscordBot.utils.sendPages]
-    - [DiscordBot.utils.sendVerbose]
+    - [DiscordBot.utils.awaitResponse](#discordbotutilsawaitresponsemessagetest-ms-channel-content-options-verbose)
+    - [DiscordBot.utils.logMessage](#discordbotutilslogmessagemessage)
+    - [DiscordBot.utils.reactButtons](#discordbotutilsreactbuttonsmessage-ms-reacthandlers-maxms)
+    - [DiscordBot.utils.sendPages](#discordbotutilssendpageschannel-pages-ms-left-right-maxms)
+    - [DiscordBot.utils.sendVerbose](#discordbotutilssendverbosechannel-content-options)
 
 ## Class: DiscordBot
 
