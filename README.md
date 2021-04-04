@@ -76,6 +76,13 @@ In this documentation, the [discord.js](https://discord.js.org/#/) module will s
     - [Response.check](#responsecheckmessage-execute)
     - [Response.say](#responsesaymessage)
 
+4. [DiscordBot.utils](#discordbotutils)
+    - [DiscordBot.utils.awaitResponse]
+    - [DiscordBot.utils.logMessage]
+    - [DiscordBot.utils.reactButtons]
+    - [DiscordBot.utils.sendPages]
+    - [DiscordBot.utils.sendVerbose]
+
 ## Class: DiscordBot
 
 DiscordBot extends [discord.Client](https://discord.js.org/#/docs/main/stable/class/Client)
@@ -256,6 +263,18 @@ Internally called by `DiscordBot` after calling `Response.check`
 
 Params:
 - `message`: `discord.Message` The message to respond to
+
+## DiscordBot.utils
+
+### DiscordBot.utils.awaitResponse(messageTest, ms, channel, content, options, verbose)
+
+### DiscordBot.utils.logMessage(message)
+
+### DiscordBot.utils.reactButtons(message, ms, reactHandlers, maxMs)
+
+### DiscordBot.utils.sendPages(channel, pages, ms, left, right, maxMs)
+
+### DiscordBot.utils.sendVerbose(channel, content, options)
 
 # Testing
 
