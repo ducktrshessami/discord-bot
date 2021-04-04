@@ -139,11 +139,11 @@ declare module "discord-bot" {
             function logMessage(message: discord.Message): discord.Message;
             function reactButtons(
                 message: discord.Message,
-                ms: Number,
-                reactHandlers?: Array<{
+                reactHandlers: Array<{
                     emoji: discord.EmojiIdentifierResolvable,
                     callback: (reaction: discord.MessageReaction, user: discord.User) => void;
                 }>,
+                ms: Number,
                 maxMs?: Number
             ): Promise<discord.Message>;
             function sendPages(
