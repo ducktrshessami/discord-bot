@@ -268,13 +268,23 @@ Params:
 
 ### DiscordBot.utils.awaitResponse(messageTest, ms, channel, content, options, verbose)
 
+Send a message and wait for a reply that passes a given test
+
 ### DiscordBot.utils.logMessage(message)
+
+Log a message
 
 ### DiscordBot.utils.reactButtons(message, ms, reactHandlers, maxMs)
 
+Handle message react buttons
+
 ### DiscordBot.utils.sendPages(channel, pages, ms, left, right, maxMs)
 
+sendVerbose a message and set up handling for reacts to change the message content
+
 ### DiscordBot.utils.sendVerbose(channel, content, options)
+
+Send a message to a TextChannel and log it
 
 # Testing
 
