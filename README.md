@@ -69,12 +69,19 @@ In this documentation, the [discord.js](https://discord.js.org/#/) module will s
     - [DiscordBot.Command](#discordbotcommandcmd-cb-options)
     - [Command.check](#commandcheckmessage-prefix-admin-execute)
     - [Command.exec](#commandexecmessage-args)
-    - [DiscordBot.Command.getArgs](#static-commandgetargsmessage-prefix)
+    - [DiscordBot.Command.getArgs](#discordbotcommandgetargsmessage-prefix)
 
 3. [Class: DiscordBot.Response](#class-discordbotresponse)
     - [DiscordBot.Response](#discordbotresponsetrigger-response-checkfunction-responsefunction-options)
     - [Response.check](#responsecheckmessage-execute)
     - [Response.say](#responsesaymessage)
+
+4. [DiscordBot.utils](#discordbotutils)
+    - [DiscordBot.utils.awaitResponse](#discordbotutilsawaitresponsemessagetest-ms-channel-content-options-verbose)
+    - [DiscordBot.utils.logMessage](#discordbotutilslogmessagemessage)
+    - [DiscordBot.utils.reactButtons](#discordbotutilsreactbuttonsmessage-reacthandlers-ms-maxms)
+    - [DiscordBot.utils.sendPages](#discordbotutilssendpageschannel-pages-ms-left-right-maxms)
+    - [DiscordBot.utils.sendVerbose](#discordbotutilssendverbosechannel-content-options)
 
 ## Class: DiscordBot
 
@@ -185,7 +192,7 @@ Params:
 - `message`: `discord.Message` The message that triggered the command
 - `args`: `Array<String>` (Optional) The args parsed from the message
 
-### static Command.getArgs(message[, prefix])
+### DiscordBot.Command.getArgs(message[, prefix])
 
 Parse a message's content into an arg Array
 
@@ -194,6 +201,8 @@ Internally called by `Command.check`
 Params:
 - `message`: `discord.Message` The message to parse
 - `prefix`: `String` (Optional) The command prefix to ignore in parsing
+
+Returns: `Array`<`String`> The list of args from the message content (CLI style, the first arg is the command)
 
 ## Class: DiscordBot.Response
 
@@ -248,6 +257,8 @@ Params:
 - `message`: `discord.Message` The message to check
 - `execute`: `Boolean` (Optional) Set to `true` to call the responseFunction on passing check. Defaults to `true`
 
+Returns: `Boolean` Whether the message passed the check or not
+
 ### Response.say(message)
 
 Calls the responseFunction on a Message
@@ -256,6 +267,86 @@ Internally called by `DiscordBot` after calling `Response.check`
 
 Params:
 - `message`: `discord.Message` The message to respond to
+
+## DiscordBot.utils
+
+### DiscordBot.utils.awaitResponse(messageTest, ms, channel, content, options, verbose)
+
+Send a message and wait for a reply that passes a given test
+
+Params:
+- `messageTest`: `function(reply)` The testing function
+    
+    Params:
+    - `reply`: `discord.Message` An incoming message in the same channel
+
+    Returns: `Boolean` Whether the message passed the check or not
+
+- `ms`: `Number` The amount of time to wait for a proper response
+- `channel`: `discord.TextChannel` The channel to send a message to watch for a reply
+- `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) Message content
+- `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) Message options
+- `verbose`: `Boolean` (Optional) Set to true to log the initial and resolving messages. Defaults to `true`
+
+Returns: `Promise`<`discord.Message`> Resolves in the message that passed the test function. If time ran out before a message passed, resolves in `undefined`
+
+### DiscordBot.utils.logMessage(message)
+
+Log a message to the console
+
+Params:
+- `message`: `discord.Message` The message to log
+
+Returns: `discord.Message` The logged message
+
+### DiscordBot.utils.reactButtons(message, reactHandlers, ms, maxMs)
+
+Handle message reacts as buttons with callbacks
+
+Params:
+- `message`: `discord.Message` The message to apply react buttons to
+- `reactHandlers`: `Array`<`ReactHandler`> An array of ReactHandlers
+
+    `ReactHandler` properties:
+    - `emoji`: `discord.EmojiIdentifierResolvable` The emoji to react with
+    - `callback`: `function(reaction, user)` The callback for the button being clicked
+
+        Params:
+        - `reaction`: `discord.MessageReaction` The reaction object from Discord
+        - `user`: `discord.User` The user that reacted
+- `ms`: `Number` The the amount of time to handle the buttons. The timer resets when a buttons is clicked
+- `maxMs`: `Number` (Optional) The maximum time to handle the buttons even with buttons being clicked. If undefined, will only stop when timing out from inactivity
+
+Returns: `Promise`<`discord.Message`> Resolves in the message the buttons were applied to
+
+### DiscordBot.utils.sendPages(channel, pages, ms, left, right, maxMs)
+
+`sendVerbose` a message and set up handling for reacts to change the message content with `reactButtons`
+
+Params:
+- `channel`: `discord.TextChannel` The channel to send the message to
+- `pages`: `Array`<`Page`> The list of pages to cycle through
+
+    `Page` properties:
+    - `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) The message content for this page
+    - `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) The message options for this page
+- `ms`: `Number` The the amount of time to handle the buttons. The timer resets when a buttons is clicked
+- `left`: `discord.EmojiIdentifierResolvable` (Optional) The emoji for the left button
+- `right`: `discord.EmojiIdentifierResolvable` (Optional) The emoji for the right button
+- `ms`: `Number` (Optional) The maximum time to handle the buttons even with buttons being clicked. If undefined, will only stop when timing out from inactivity
+
+Returns: `Promise`<`discord.Message`> Resolves in the message sent
+
+### DiscordBot.utils.sendVerbose(channel, content, options)
+
+Send a message to a TextChannel and log it
+
+Params:
+- `channel`: `discord.TextChannel` The channel to send the message to
+- `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) The message content
+- `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) The message options
+
+Returns: `Promise`<`discord.Message`> Resolves in the message sent
 
 # Testing
 
