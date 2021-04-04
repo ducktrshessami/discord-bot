@@ -337,6 +337,13 @@ Returns: `Promise`<`discord.Message`> Resolves in the message sent
 
 Send a message to a TextChannel and log it
 
+Params:
+- `channel`: `discord.TextChannel` The channel to send the message to
+- `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) The message content
+- `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) The message options
+
+Returns: `Promise`<`discord.Message`> Resolves in the message sent
+
 # Testing
 
 Testing handled by [mocha](https://mochajs.org/)
