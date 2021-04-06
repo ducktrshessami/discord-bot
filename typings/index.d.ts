@@ -141,7 +141,7 @@ declare module "discord-bot" {
                 message: discord.Message,
                 reactHandlers: Array<{
                     emoji: discord.EmojiIdentifierResolvable,
-                    callback: (reaction: discord.MessageReaction, user: discord.User) => void;
+                    callback: (reaction: discord.MessageReaction, user: discord.User, add: Boolean) => void;
                 }>,
                 ms: Number,
                 maxMs?: Number
