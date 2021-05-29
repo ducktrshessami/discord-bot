@@ -159,8 +159,9 @@ declare module "discord-bot" {
             ): Promise<Discord.Message>;
             function sendVerbose(channel: Discord.TextChannel, content?: Discord.StringResolvable | Discord.APIMessage, options?: Discord.MessageOptions | Discord.MessageAdditions): Promise<Discord.Message>;
         }
+
+        export { Command, Response, utils, Discord };
     }
 
-    export default DiscordBot;
-    export { default as Discord } from "discord.js";
+    export = DiscordBot;
 }
