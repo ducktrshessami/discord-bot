@@ -56,7 +56,7 @@ function rollCommand(message) {
 
 # Documentation
 
-In this documentation, the [discord.js](https://discord.js.org/#/) module will simply be referred to as `discord`.
+In this documentation, the [discord.js](https://discord.js.org/#/) module will simply be referred to as `Discord`.
 
 ## Table of Contents
 
@@ -83,9 +83,11 @@ In this documentation, the [discord.js](https://discord.js.org/#/) module will s
     - [DiscordBot.utils.sendPages](#discordbotutilssendpageschannel-pages-ms-left-right-maxms)
     - [DiscordBot.utils.sendVerbose](#discordbotutilssendverbosechannel-content-options)
 
+5. [DiscordBot.Discord](#discordbotdiscord)
+
 ## Class: DiscordBot
 
-DiscordBot extends [discord.Client](https://discord.js.org/#/docs/main/stable/class/Client)
+DiscordBot extends [Discord.Client](https://discord.js.org/#/docs/main/stable/class/Client)
 
 ### DiscordBot(config[, commands, responses])
 
@@ -94,9 +96,9 @@ DiscordBot constructor
 #### Params:
 - `config`: `Object`:
     - `token`: `String` The bot's token obtained from the [Discord Developer Portal](https://discord.com/developers/applications)
-    - `admin`: `Array<discord.Snowflake>` [User IDs](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-) of users designated as botmins
-    - `options`: [`discord.ClientOptions`](https://discord.js.org/#/docs/main/stable/typedef/ClientOptions) (Optional)
-    - `embedColor`: [`discord.ColorResolvable`](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable) (Optional) The color for message embeds. Mostly for the pregenerated command list sent by the `help` command
+    - `admin`: `Array<Discord.Snowflake>` [User IDs](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-) of users designated as botmins
+    - `options`: [`Discord.ClientOptions`](https://discord.js.org/#/docs/main/stable/typedef/ClientOptions) (Optional)
+    - `embedColor`: [`Discord.ColorResolvable`](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable) (Optional) The color for message embeds. Mostly for the pregenerated command list sent by the `help` command
     - `generateCmd`: `Object`: (Optional) Set any of the following to `true` to use the preset command shown
         - `help`: `Boolean` (Optional)
 
@@ -122,7 +124,7 @@ DiscordBot constructor
 Set a list of presences to cycle through. The `Timeout` that handles this cycle is stored in `DiscordBot.pTimeout`.
 
 #### Params:
-- `list`: `Array<discord.PresenceData>` [Presences](https://discord.js.org/#/docs/main/stable/typedef/PresenceData) to loop
+- `list`: `Array<Discord.PresenceData>` [Presences](https://discord.js.org/#/docs/main/stable/typedef/PresenceData) to loop
 - `minutes`: `Number` The interval to loop presences at (in minutes)
 - `shuffle`: `Boolean` (Optional) Set to `true` to randomize the order presences are set. Defaults to `true`
 
@@ -133,7 +135,7 @@ Sets a new presence for a duration. Called internally by `DiscordBot.loopPresenc
 If no presence or duration is passed, uses a data stored from `DiscordBot.loopPresences`.
 
 #### Params:
-- `presence`: [`discord.PresenceData`](https://discord.js.org/#/docs/main/stable/typedef/PresenceData) (Optional)
+- `presence`: [`Discord.PresenceData`](https://discord.js.org/#/docs/main/stable/typedef/PresenceData) (Optional)
 - `time`: `Number` (Optional) The duration for this presence to be displayed. If [`loopPresences`] has been called, goes back to looping the set presences.
 
 ## Class: DiscordBot.Command
@@ -157,7 +159,7 @@ Params:
 - `cb`: `function(message, args)` The callback when the command is triggered
 
     Params:
-    - `message`: `discord.Message` The message that triggered the command
+    - `message`: `Discord.Message` The message that triggered the command
     - `args`: `Array<String>` The args parsed from the message (CLI format so args[0] is the cmd)
 - `options`: `Object`: (Optional)
     - `usage`: `String` (Optional) For display in the help command
@@ -175,7 +177,7 @@ Checks if a message would trigger the command
 Internally called by `DiscordBot` instances when handling commands
 
 Params:
-- `message`: `discord.Message` The message to check
+- `message`: `Discord.Message` The message to check
 - `prefix`: `String` (Optional) The command prefix used in the message
 - `admin`: `Boolean` (Optional) Whether the message's author is admin or not. Defaults to `false`
 - `execute`: `Boolean` (Optional) Set to `true` to call the callback on passing check. Defaults to `true`
@@ -189,7 +191,7 @@ Calls the command's callback on a message
 Internally called by `DiscordBot` after calling `Command.check`
 
 Params:
-- `message`: `discord.Message` The message that triggered the command
+- `message`: `Discord.Message` The message that triggered the command
 - `args`: `Array<String>` (Optional) The args parsed from the message
 
 ### DiscordBot.Command.getArgs(message[, prefix])
@@ -199,7 +201,7 @@ Parse a message's content into an arg Array
 Internally called by `Command.check`
 
 Params:
-- `message`: `discord.Message` The message to parse
+- `message`: `Discord.Message` The message to parse
 - `prefix`: `String` (Optional) The command prefix to ignore in parsing
 
 Returns: `Array`<`String`> The list of args from the message content (CLI style, the first arg is the command)
@@ -222,20 +224,20 @@ Params:
 - `checkFunction`: `function(message, trigger)` (Optional) The function that tests whether a message would trigger a response. Default values detailed below
 
     Params:
-    - `message`: `discord.Message` The message to test
+    - `message`: `Discord.Message` The message to test
     - `trigger`: `Array<String> | String` The trigger from this response
 - `responseFunction`: `function(message, response)` (Optional) The function that handles responding to the message. Default value detailed below
 
     Params:
-    - `message`: `discord.Message` The message to respond to
+    - `message`: `Discord.Message` The message to respond to
     - `response`: `any` (Optional) Usually the message to send back
 - `options`: `Object` (Optional) Restrict this response by various IDs
-    - `userWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with userBlacklist
-    - `userBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with userWhitelist
-    - `serverWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with serverBlacklist
-    - `serverBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with serverWhitelist
-    - `channelWhitelist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelBlacklist
-    - `channelBlacklist`: `Array<discord.Snowflake>` (Optional) Mutually exclusive with channelWhitelist
+    - `userWhitelist`: `Array<Discord.Snowflake>` (Optional) Mutually exclusive with userBlacklist
+    - `userBlacklist`: `Array<Discord.Snowflake>` (Optional) Mutually exclusive with userWhitelist
+    - `serverWhitelist`: `Array<Discord.Snowflake>` (Optional) Mutually exclusive with serverBlacklist
+    - `serverBlacklist`: `Array<Discord.Snowflake>` (Optional) Mutually exclusive with serverWhitelist
+    - `channelWhitelist`: `Array<Discord.Snowflake>` (Optional) Mutually exclusive with channelBlacklist
+    - `channelBlacklist`: `Array<Discord.Snowflake>` (Optional) Mutually exclusive with channelWhitelist
 
 #### Default checkFunction
 
@@ -254,7 +256,7 @@ Handles whitelists/blacklists and calls the checkFunction on a Message
 Internally called by `DiscordBot` instances when handling responses
 
 Params:
-- `message`: `discord.Message` The message to check
+- `message`: `Discord.Message` The message to check
 - `execute`: `Boolean` (Optional) Set to `true` to call the responseFunction on passing check. Defaults to `true`
 
 Returns: `Boolean` Whether the message passed the check or not
@@ -266,7 +268,7 @@ Calls the responseFunction on a Message
 Internally called by `DiscordBot` after calling `Response.check`
 
 Params:
-- `message`: `discord.Message` The message to respond to
+- `message`: `Discord.Message` The message to respond to
 
 ## DiscordBot.utils
 
@@ -278,75 +280,79 @@ Params:
 - `messageTest`: `function(reply)` The testing function
     
     Params:
-    - `reply`: `discord.Message` An incoming message in the same channel
+    - `reply`: `Discord.Message` An incoming message in the same channel
 
     Returns: `Boolean` Whether the message passed the check or not
 
 - `ms`: `Number` The amount of time to wait for a proper response
-- `channel`: `discord.TextChannel` The channel to send a message to watch for a reply
-- `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) Message content
-- `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) Message options
+- `channel`: `Discord.TextChannel` The channel to send a message to watch for a reply
+- `content`: `Discord.StringResolvable` | `Discord.APIMessage` (Optional) Message content
+- `options`: `Discord.MessageOptions` | `Discord.MessageAdditions` (Optional) Message options
 - `verbose`: `Boolean` (Optional) Set to true to log the initial and resolving messages. Defaults to `true`
 
-Returns: `Promise`<`discord.Message`> Resolves in the message that passed the test function. If time ran out before a message passed, resolves in `undefined`
+Returns: `Promise`<`Discord.Message`> Resolves in the message that passed the test function. If time ran out before a message passed, resolves in `undefined`
 
 ### DiscordBot.utils.logMessage(message)
 
 Log a message to the console
 
 Params:
-- `message`: `discord.Message` The message to log
+- `message`: `Discord.Message` The message to log
 
-Returns: `discord.Message` The logged message
+Returns: `Discord.Message` The logged message
 
 ### DiscordBot.utils.reactButtons(message, reactHandlers, ms, maxMs)
 
 Handle message reacts as buttons with callbacks
 
 Params:
-- `message`: `discord.Message` The message to apply react buttons to
+- `message`: `Discord.Message` The message to apply react buttons to
 - `reactHandlers`: `Array`<`ReactHandler`> An array of ReactHandlers
 
     `ReactHandler` properties:
-    - `emoji`: `discord.EmojiIdentifierResolvable` The emoji to react with
+    - `emoji`: `Discord.EmojiIdentifierResolvable` The emoji to react with
     - `callback`: `function(reaction, user)` The callback for the button being clicked
 
         Params:
-        - `reaction`: `discord.MessageReaction` The reaction object from Discord
-        - `user`: `discord.User` The user that reacted
+        - `reaction`: `Discord.MessageReaction` The reaction object from Discord
+        - `user`: `Discord.User` The user that reacted
 - `ms`: `Number` The the amount of time to handle the buttons. The timer resets when a buttons is clicked
 - `maxMs`: `Number` (Optional) The maximum time to handle the buttons even with buttons being clicked. If undefined, will only stop when timing out from inactivity
 
-Returns: `Promise`<`discord.Message`> Resolves in the message the buttons were applied to
+Returns: `Promise`<`Discord.Message`> Resolves in the message the buttons were applied to
 
 ### DiscordBot.utils.sendPages(channel, pages, ms, left, right, maxMs)
 
 `sendVerbose` a message and set up handling for reacts to change the message content with `reactButtons`
 
 Params:
-- `channel`: `discord.TextChannel` The channel to send the message to
+- `channel`: `Discord.TextChannel` The channel to send the message to
 - `pages`: `Array`<`Page`> The list of pages to cycle through
 
     `Page` properties:
-    - `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) The message content for this page
-    - `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) The message options for this page
+    - `content`: `Discord.StringResolvable` | `Discord.APIMessage` (Optional) The message content for this page
+    - `options`: `Discord.MessageOptions` | `Discord.MessageAdditions` (Optional) The message options for this page
 - `ms`: `Number` The the amount of time to handle the buttons. The timer resets when a buttons is clicked
-- `left`: `discord.EmojiIdentifierResolvable` (Optional) The emoji for the left button
-- `right`: `discord.EmojiIdentifierResolvable` (Optional) The emoji for the right button
+- `left`: `Discord.EmojiIdentifierResolvable` (Optional) The emoji for the left button
+- `right`: `Discord.EmojiIdentifierResolvable` (Optional) The emoji for the right button
 - `ms`: `Number` (Optional) The maximum time to handle the buttons even with buttons being clicked. If undefined, will only stop when timing out from inactivity
 
-Returns: `Promise`<`discord.Message`> Resolves in the message sent
+Returns: `Promise`<`Discord.Message`> Resolves in the message sent
 
 ### DiscordBot.utils.sendVerbose(channel, content, options)
 
 Send a message to a TextChannel and log it
 
 Params:
-- `channel`: `discord.TextChannel` The channel to send the message to
-- `content`: `discord.StringResolvable` | `discord.APIMessage` (Optional) The message content
-- `options`: `discord.MessageOptions` | `discord.MessageAdditions` (Optional) The message options
+- `channel`: `Discord.TextChannel` The channel to send the message to
+- `content`: `Discord.StringResolvable` | `Discord.APIMessage` (Optional) The message content
+- `options`: `Discord.MessageOptions` | `Discord.MessageAdditions` (Optional) The message options
 
-Returns: `Promise`<`discord.Message`> Resolves in the message sent
+Returns: `Promise`<`Discord.Message`> Resolves in the message sent
+
+### DiscordBot.Discord
+
+This references the `discord.js` module for the purpose of accessing internal `discord.js` resources
 
 # Testing
 
