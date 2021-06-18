@@ -1,6 +1,6 @@
 {
   "name": "discord-bot",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "A discord.js wrapper specific to bots",
   "main": "./lib/index.js",
   "author": "ducktrshessami",
