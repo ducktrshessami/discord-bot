@@ -33,7 +33,7 @@ let ping = new DiscordBot.Response("ping", "Pong!");
 let client = new DiscordBot(
     {
         token: "BOT_TOKEN",
-        admin: [ "USER_ID" ]
+        botmins: [ "USER_ID" ]
     },
     [ roll ],
     [ ping ]
@@ -67,7 +67,7 @@ In this documentation, the [discord.js](https://discord.js.org/#/) module will s
 
 2. [Class: DiscordBot.Command](#class-discordbotcommand)
     - [DiscordBot.Command](#discordbotcommandcmd-cb-options)
-    - [Command.check](#commandcheckmessage-prefix-admin-execute)
+    - [Command.check](#commandcheckmessage-prefix-botmin-execute)
     - [Command.exec](#commandexecmessage-args)
     - [DiscordBot.Command.getArgs](#discordbotcommandgetargsmessage-prefix)
 
@@ -96,7 +96,7 @@ DiscordBot constructor
 #### Params:
 - `config`: `Object`:
     - `token`: `String` The bot's token obtained from the [Discord Developer Portal](https://discord.com/developers/applications)
-    - `admin`: `Array<Discord.Snowflake>` [User IDs](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-) of users designated as botmins
+    - `botmins`: `Array<Discord.Snowflake>` [User IDs](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-) of users designated as botmins
     - `options`: [`Discord.ClientOptions`](https://discord.js.org/#/docs/main/stable/typedef/ClientOptions) (Optional)
     - `embedColor`: [`Discord.ColorResolvable`](https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable) (Optional) The color for message embeds. Mostly for the pregenerated command list sent by the `help` command
     - `generateCmd`: `Object`: (Optional) Set any of the following to `true` to use the preset command shown
@@ -167,10 +167,11 @@ Params:
     - `subtitle`: `String` (Optional) For display in the help command
     - `hidden`: `Boolean` (Optional) Set to `true` to be unlisted in the help command
     - `owner`: `Boolean` (Optional) Set to `true` to restrict the command to the server owner
-    - `admin`: `Boolean` (Optional) Set to `true` to restrict the command to bot admins
+    - `botmin`: `Boolean` (Optional) Set to `true` to restrict the command to bot admins
+    - `requirePerms`: `Discord.PermissionResolvable` (Optional) The permission(s) to require a user to have
     - `aliases`: `Array<String>` (Optional) Alternate command names that trigger the same callback
 
-### Command.check(message[, prefix, admin, execute])
+### Command.check(message[, prefix, botmin, execute])
 
 Checks if a message would trigger the command
 
@@ -179,7 +180,7 @@ Internally called by `DiscordBot` instances when handling commands
 Params:
 - `message`: `Discord.Message` The message to check
 - `prefix`: `String` (Optional) The command prefix used in the message
-- `admin`: `Boolean` (Optional) Whether the message's author is admin or not. Defaults to `false`
+- `botmin`: `Boolean` (Optional) Whether the message's author is botmin or not. Defaults to `false`
 - `execute`: `Boolean` (Optional) Set to `true` to call the callback on passing check. Defaults to `true`
 
 Returns: `Boolean` Whether the message passed the check or not

@@ -4,7 +4,7 @@ declare module "discord-bot" {
     class DiscordBot extends Discord.Client {
         public config: {
             token: String,
-            admin: Array<Discord.Snowflake>,
+            botmin: Array<Discord.Snowflake>,
             options?: Discord.ClientOptions,
             embedColor?: Discord.ColorResolvable
         };
@@ -17,7 +17,7 @@ declare module "discord-bot" {
         constructor(
             config: {
                 token: String,
-                admin: Array<Discord.Snowflake>,
+                botmin: Array<Discord.Snowflake>,
                 options?: Discord.ClientOptions,
                 embedColor?: Discord.ColorResolvable,
                 generateCmd?: {
@@ -55,7 +55,8 @@ declare module "discord-bot" {
             public subtitle: String;
             public hidden: Boolean;
             public owner: Boolean;
-            public admin: Boolean;
+            public botmin: Boolean;
+            public requirePerms: Discord.PermissionResolvable;
             public aliases: Array<String>;
 
             private callback: (message: Discord.Message, args?: Array<String>) => void;
@@ -69,12 +70,13 @@ declare module "discord-bot" {
                     subtitle?: String,
                     hidden?: Boolean,
                     owner?: Boolean,
-                    admin?: Boolean,
+                    botmin?: Boolean,
+                    requirePerms?: Discord.PermissionResolvable,
                     aliases?: Array<String>;
                 }
             );
 
-            public check(message: Discord.Message, prefix?: String, admin?: Boolean, execute?: Boolean): Boolean;
+            public check(message: Discord.Message, prefix?: String, botmin?: Boolean, execute?: Boolean): Boolean;
             public exec(message: Discord.Message, args?: Array<String>): void;
         }
 
